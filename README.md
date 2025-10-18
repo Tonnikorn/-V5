@@ -189,7 +189,7 @@ document.getElementById('calculateBtn').addEventListener('click', function() {
     document.getElementById('total').innerHTML = resultText;
 
     // ✅ ส่งข้อมูลเข้า Google Sheet
-    const scriptURL = "https://script.google.com/macros/s/AKfycbxBRMxefITgLlKgil0ojzs6lDVduALSbeAIWqpx0-zk579pMCdbeRmBLYxL6uhrVsVg/exec"; // 🔗 วาง URL ของ Apps Script ที่คุณได้มา
+    const scriptURL = "[https://script.google.com/macros/s/AKfycbxBRMxefITgLlKgil0ojzs6lDVduALSbeAIWqpx0-zk579pMCdbeRmBLYxL6uhrVsVg/exec](https://script.google.com/macros/s/AKfycbxSiPlqlYD8zLDbZp8hxl9QkizcUtYIJsJsY5FbAlsSiYU3_pULJg-TZWLMpXry_YX7/exec)"; // 🔗 วาง URL ของ Apps Script ที่คุณได้มา
     fetch(scriptURL, {
         method: 'POST',
         mode: 'no-cors',
