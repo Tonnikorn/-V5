@@ -3,87 +3,127 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ซื้อขายเห็ดแดง</title>
+<title>โปรแกรมคำนวณราคาเห็ดแดง</title>
 <style>
     body {
         font-family: 'Arial', sans-serif;
-        background-color: #FFF5E6;
+        background-color: #FFF8F0;
         margin: 0;
         padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
     }
     .container {
-        max-width: 400px;
-        margin: 20px auto;
-        background-color: #FFFAF0;
-        padding: 30px;
-        border-radius: 20px;
-        box-shadow: 0 0 15px rgba(0,0,0,0.2);
+        width: 420px;
+        background-color: #FFFDF5;
+        padding: 30px 25px;
+        border-radius: 25px;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
     h1 { 
         text-align: center; 
         color: #C1272D; 
-        margin-bottom: 30px; 
-        font-size: 32px; 
+        margin-bottom: 35px; 
+        font-size: 36px; 
+    }
+    .input-group {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 20px;
+        padding: 15px;
+        border-radius: 15px;
+        border: 3px solid #CCC;
+        box-shadow: inset 0 0 10px rgba(0,0,0,0.05);
     }
     label { 
-        display: block; 
-        font-size: 22px; 
-        margin-top: 15px; 
+        font-size: 24px; 
+        font-weight: bold;
+        margin-bottom: 10px;
+        text-align: center;
     }
-    input[type="number"] {
-        width: 100%; 
-        padding: 12px; 
-        font-size: 22px;
-        border-radius: 10px; 
-        border: 1px solid #CCC; 
-        margin-top: 5px;
+    input[type="text"] {
+        width: 90%; 
+        padding: 14px; 
+        font-size: 24px;
+        border-radius: 12px; 
+        border: 2px solid #AAA; 
+        outline: none;
+        text-align: center;
+    }
+    input[type="text"]:focus {
+        border-color: #C1272D;
+        box-shadow: 0 0 10px rgba(193, 39, 45, 0.3);
     }
     button {
-        width: 100%; 
-        padding: 15px; 
-        font-size: 24px;
+        width: 90%; 
+        padding: 18px; 
+        font-size: 26px;
         background-color: #C1272D; 
         color: white; 
         border: none;
-        border-radius: 15px; 
+        border-radius: 20px; 
         cursor: pointer; 
         margin-top: 25px;
+        font-weight: bold;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        transition: 0.2s;
     }
-    button:hover { background-color: #FF4C4C; }
+    button:hover { 
+        background-color: #FF4C4C; 
+        transform: translateY(-2px);
+    }
     .result { 
-        margin-top: 25px; 
-        font-size: 26px; 
+        width: 100%;
+        margin-top: 30px; 
+        font-size: 28px; 
         font-weight: bold; 
         text-align: center; 
         color: #1C6E8C; 
-        line-height: 1.8;
+        line-height: 2;
+        background-color: #F0F8FF;
+        padding: 20px;
+        border-radius: 15px;
+        border: 2px solid #1C6E8C;
+        box-shadow: inset 0 0 8px rgba(28,110,140,0.2);
     }
+    #group-large { background-color: #FFE5E5; border-color: #FF9999; }
+    #group-small { background-color: #E5FFE5; border-color: #99FF99; }
+    #group-bloom { background-color: #E5E5FF; border-color: #9999FF; }
+
     @media (max-width: 500px) {
-        h1 { font-size: 28px; } 
-        label { font-size: 20px; } 
-        input[type="number"] { font-size: 20px; } 
-        button { font-size: 22px; } 
+        .container { width: 90%; padding: 20px; }
+        h1 { font-size: 32px; margin-bottom: 25px; }
+        label { font-size: 22px; }
+        input[type="text"] { font-size: 22px; }
+        button { font-size: 24px; }
         .result { font-size: 24px; }
     }
 </style>
 </head>
 <body>
-<div class="container" id="container">
-    <h1>ซื้อขายเห็ดแดง</h1>
+<div class="container">
+    <h1>โปรแกรมซื้อขายเห็ดแดง</h1>
 
     <div class="input-group" id="group-large">
-        <label for="large">จี๋ใหญ่ (กิโลกรัม):</label>
-        <input type="number" id="large" min="0" placeholder="กรอกตัวเลขเท่านั้น" inputmode="decimal">
+        <label for="largeWeight">จี๋ใหญ่ (กิโลกรัม)</label>
+        <input type="text" id="largeWeight" placeholder="กรอกน้ำหนัก">
     </div>
 
     <div class="input-group" id="group-small">
-        <label for="small">จี๋เล็ก (กิโลกรัม):</label>
-        <input type="number" id="small" min="0" placeholder="กรอกตัวเลขเท่านั้น" inputmode="decimal">
+        <label for="smallWeight">จี๋เล็ก (กิโลกรัม)</label>
+        <input type="text" id="smallWeight" placeholder="กรอกน้ำหนัก">
     </div>
 
     <div class="input-group" id="group-bloom">
-        <label for="bloom">เห็ดบาน (กิโลกรัม):</label>
-        <input type="number" id="bloom" min="0" placeholder="กรอกตัวเลขเท่านั้น" inputmode="decimal">
+        <label for="bloomWeight">เห็ดบาน (กิโลกรัม)</label>
+        <input type="text" id="bloomWeight" placeholder="กรอกน้ำหนัก">
     </div>
 
     <button type="button" id="calculateBtn">คำนวณราคา</button>
@@ -92,19 +132,29 @@
 </div>
 
 <script>
+function calculateWeight(inputId) {
+    const input = document.getElementById(inputId).value || '0';
+    try {
+        const value = Function('"use strict"; return (' + input + ')')();
+        return Math.max(parseFloat(value) || 0, 0);
+    } catch {
+        return 0;
+    }
+}
+
 document.getElementById('calculateBtn').addEventListener('click', function() {
-    const priceSmall = 100;
     const priceLarge = 290;
+    const priceSmall = 100;
     const priceBloom = 70;
 
-    const small = parseFloat(document.getElementById('small').value) || 0;
-    const large = parseFloat(document.getElementById('large').value) || 0;
-    const bloom = parseFloat(document.getElementById('bloom').value) || 0;
+    const large = calculateWeight('largeWeight');
+    const small = calculateWeight('smallWeight');
+    const bloom = calculateWeight('bloomWeight');
 
-    const totalSmall = small * priceSmall;
     const totalLarge = large * priceLarge;
+    const totalSmall = small * priceSmall;
     const totalBloom = bloom * priceBloom;
-    const total = totalSmall + totalLarge + totalBloom;
+    const total = totalLarge + totalSmall + totalBloom;
 
     document.getElementById('total').innerHTML = `
         จี๋ใหญ่: ${totalLarge.toLocaleString()} บาท<br>
@@ -113,10 +163,10 @@ document.getElementById('calculateBtn').addEventListener('click', function() {
         <strong>จำนวนเงินทั้งหมด: ${total.toLocaleString()} บาท</strong>
     `;
 
-    // ล้างค่าตัวเลข
-    document.getElementById('small').value = '';
-    document.getElementById('large').value = '';
-    document.getElementById('bloom').value = '';
+    // ล้างค่า
+    document.getElementById('largeWeight').value = '';
+    document.getElementById('smallWeight').value = '';
+    document.getElementById('bloomWeight').value = '';
 });
 </script>
 </body>
